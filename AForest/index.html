@@ -74,6 +74,17 @@ img.dragme_hidden {
     transition: visibility 0s 2s, opacity 2s linear;
 }
 
+div.resolution {
+    position: absolute;
+    right: 0px;
+    bottom: 40px;
+    padding: 20px;
+
+    color: #ffffff;
+    text-shadow: 1px 1px #000000;
+    text-align: right;
+}
+
 </style>
 
 <script src="exposure.js" async type="text/javascript"></script>
@@ -106,6 +117,21 @@ Exposure stacking from 2s to 512s.<br/>
 </svg>
 
 <img src="dragme.svg" class="dragme" id="dragme" />
+
+<div class="resolution">
+<label for="4k_res">4k</label>
+<input type="radio" id="4k_res" name="resolution" />
+<br />
+
+<label for="2k_res">1080p</label>
+<input type="radio" id="2k_res" name="resolution" />
+<br />
+
+<label for="1k_res">720p</label>
+<input type="radio" id="1k_res" name="resolution" checked />
+<br />
+
+</div>
 
 </body>
 </html>

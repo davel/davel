@@ -4,11 +4,14 @@
     let on_top;
 
     const duration = 323.0/50.0;
-        
+
     const line = document.getElementById("line");
     const dragme = document.getElementById("dragme");
     const exposure_display = document.getElementById("exposure");
     const video_box = document.getElementById("video_box");
+    const res_4k = document.getElementById("4k_res");
+    const res_2k = document.getElementById("2k_res");
+    const res_1k = document.getElementById("1k_res");
 
     function display_details(number) {
         const exposure = Number(2**(number/4+1)).toFixed(1);
@@ -35,15 +38,15 @@
             new_vid.appendChild(new_source);
         }
 
-        if (window.availableWidth > 3840) {
+        if (res_4k.checked) {
             // Firefox struggles with 4k, so only attempt if you really need
-            // the pixels. 
+            // the pixels.
             add_source("4k-h265", "mp4");
             add_source("4k-vp9", "webm");
             add_source("4k-h264", "mp4");
         }
 
-        if (window.availableWidth > 2000) {
+        if (res_4k.checked || res_2k.checked) {
             add_source("1k-vp9", "webm");
             add_source("1k-h264", "mp4");
         }
@@ -104,8 +107,25 @@
         on_top.style.zIndex = -1;
         on_top.autoplay = Boolean(true);
         on_top.play();
-        
+
         display_details(starting_slider);
+
+        function change_res(e) {
+            if (e.target.checked) {
+                while (video_box.firstChild) {
+                    video_box.removeChild(video_box.lastChild);
+                }
+                const new_exposure = Math.floor(slider.value)-1;
+                on_top = get_vid(new_exposure);
+                on_top.style = -1;
+                on_top.play();
+            }
+
+        }
+
+        res_1k.addEventListener("change", change_res);
+        res_2k.addEventListener("change", change_res);
+        res_4k.addEventListener("change", change_res);
 
         window.setInterval(function() {
             for (let i=0; i<33; i++) {
@@ -115,7 +135,7 @@
                     return;
                 }
             }
-        }, 5555);
+        }, 10011);
 
         window.setInterval(function() {
             const new_exposure = Math.floor(slider.value)-1;
@@ -160,7 +180,7 @@
                     attempt_sync(get_vid(new_exposure-1));
                 }
                 if (new_exposure<32) {
-                    attempt_sync(get_vid(new_exposure-1));
+                    attempt_sync(get_vid(new_exposure+1));
                 }
             }
 
