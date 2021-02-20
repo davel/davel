@@ -25,6 +25,7 @@
             return old_vid;
         }
         const new_vid = document.createElement("video");
+        new_vid.poster = "https://a-forest-2k-vp9.davel.me.uk/poster-"+number+".jpg";
         new_vid.className = "full";
         new_vid.defaultMuted = new Boolean(true);
         new_vid.loop         = new Boolean(true);
@@ -47,8 +48,8 @@
         }
 
         if (res_4k.checked || res_2k.checked) {
-            add_source("1k-vp9", "webm");
-            add_source("1k-h264", "mp4");
+            add_source("2k-vp9", "webm");
+            add_source("2k-h264", "mp4");
         }
 
         add_source("1k-vp9", "webm");
