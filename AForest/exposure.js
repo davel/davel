@@ -184,6 +184,14 @@
                     attempt_sync(get_vid(new_exposure+1));
                 }
             }
+            else {
+                if (new_exposure>0) {
+                    get_vid(new_exposure-1);
+                }
+                if (new_exposure<32) {
+                    get_vid(new_exposure+1);
+                }
+            }
 
         }, 300);
     });
